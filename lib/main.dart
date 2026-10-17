@@ -1,6 +1,6 @@
-import 'package:belajar_flutter/calculator_page.dart';
+import 'package:belajar_flutter/pages/calculator_page.dart';
 import 'package:belajar_flutter/routes.dart';
-import 'package:belajar_flutter/login_page.dart';
+import 'package:belajar_flutter/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: "Belajar Flutter GetX",
-      initialRoute: Routes.registration,
+      initialRoute: Routes.listGame,
       getPages: Routes.myPages,
     );
   }

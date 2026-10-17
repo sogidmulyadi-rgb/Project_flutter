@@ -1,6 +1,6 @@
-import 'package:belajar_flutter/controllers/kalkulator_controller.dart';
-import 'package:belajar_flutter/Components/mybutton.dart';
-import 'package:belajar_flutter/Components/mytextfield.dart';
+import 'package:belajar_flutter/controllers/calculator_controller.dart';
+import 'package:belajar_flutter/components/mybutton.dart';
+import 'package:belajar_flutter/components/mytextfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
