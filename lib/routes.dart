@@ -1,16 +1,18 @@
 import 'package:belajar_flutter/pages/confirm_registration_page.dart';
 import 'package:belajar_flutter/pages/registration_page.dart';
-import 'package:belajar_flutter/pages/list_game_page.dart';
+import 'package:belajar_flutter/pages/list_food_page.dart';
+import 'package:belajar_flutter/pages/detail_food_page.dart';
 import 'package:get/get.dart';
 
 class Routes {
-  static const String listGame = '/list_game';
+  static const String listFood = '/list_food';
+  static const String detailFood = '/detail_food';
   static const String registration = '/registration';
   static const String confirmRegistration = '/confirm_registration';
 
-  // Masukkan kedalam myPages array menggunakan GetX
   static final myPages = [
-    GetPage(name: listGame, page: () => ListGamePage()),
+    GetPage(name: listFood, page: () => ListFoodPage()),
+    GetPage(name: detailFood, page: () => DetailFoodPage()),
     GetPage(name: registration, page: () => RegistrationPage()),
     GetPage(name: confirmRegistration, page: () => ConfirmRegistrationPage()),
   ];
