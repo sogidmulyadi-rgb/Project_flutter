@@ -1,71 +1,62 @@
 import 'package:belajar_flutter/components/mytextfield.dart';
+import 'package:belajar_flutter/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  TextEditingController txtUsername = TextEditingController();
-  TextEditingController txtPassword = TextEditingController();
-  String statusLogin = "";
-
-  @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
+
     return Scaffold(
-      appBar: AppBar(title: Text("login page")),
+      appBar: AppBar(title: const Text("login page")),
       body: Column(
         children: [
-          Text(
-            "Welcome to application $statusLogin",
+          const Text(
+            "Welcome to application",
             style: TextStyle(
               fontSize: 30,
-              color: const Color.fromARGB(255, 46, 9, 182),
+              color: Color.fromARGB(255, 46, 9, 182),
               fontWeight: FontWeight.bold,
             ),
           ),
+
           Container(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             child: Mytextfield(
               myHint: "input username",
-              txtController: txtUsername,
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: Mytextfield(
-              myHint: "input password",
-              txtController: txtPassword,
+              txtController: controller.txtUsername,
             ),
           ),
 
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                // fungsinya untuk reload / refresh satu page full
-                String username = txtUsername.text.toString();
-                String password = txtPassword.text.toString();
-                if (username == "admin" && password == "admin") {
-                  statusLogin = "admin";
-                  print("sukses login");
-                } else {
-                  statusLogin = "failed";
-                  print("gagal login");
-                }
-              });
-            },
-            child: Text(
-              "Login",
-              style: TextStyle(
-                fontSize: 30,
-                color: const Color.fromARGB(255, 30, 175, 44),
-                fontWeight: FontWeight.bold,
-              ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: Mytextfield(
+              myHint: "input password",
+              txtController: controller.txtPassword,
             ),
           ),
+
+          Obx(
+            () => controller.isLoading.value
+                ? const Center(child: CircularProgressIndicator())
+                : ElevatedButton(
+                    onPressed: () {
+                      controller.login();
+                    },
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Color.fromARGB(255, 30, 175, 44),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+          ),
+          
         ],
       ),
     );
