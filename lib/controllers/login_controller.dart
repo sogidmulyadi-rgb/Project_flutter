@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:belajar_flutter/routes.dart';
 
 class LoginController extends GetxController {
   final txtUsername = TextEditingController();
@@ -15,6 +16,7 @@ class LoginController extends GetxController {
       try {
         isLoading.value = true; // sebagai tanda di page nya muncul loading widget
         final url = Uri.parse('https://mediadwi.com/api/latihan/login');
+        // (https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood) ini untuk pertemuan selanjutnya
 
         final response = await http.post(url, body: {
             'username': txtUsername.text.toString(),
@@ -30,6 +32,7 @@ class LoginController extends GetxController {
           final data = jsonDecode(response.body);
           if (data['status'] == true) {
             Get.snackbar('Berhasil', data['message']);
+            Get.offNamed(Routes.mainMenu); // ke main menu
           } else {
             Get.snackbar('gagal', data['message']);
           }
