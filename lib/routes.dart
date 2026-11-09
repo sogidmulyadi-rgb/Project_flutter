@@ -1,4 +1,5 @@
 import 'package:belajar_flutter/pages/confirm_registration_page.dart';
+import 'package:belajar_flutter/pages/clone_app_page.dart';
 import 'package:belajar_flutter/pages/registration_page.dart';
 import 'package:belajar_flutter/pages/list_food_page.dart';
 import 'package:belajar_flutter/pages/detail_food_page.dart';
@@ -13,8 +14,10 @@ class Routes {
   static const String detailFood = '/detail_food';
   static const String registration = '/registration';
   static const String confirmRegistration = '/confirm_registration';
+  static const String cloneApp = '/clone_app';
 
   static final myPages = [
+    GetPage(name: cloneApp, page: () => SpotifyApp()),
     GetPage(name: login, page: () => LoginPage()),
     GetPage(name: mainMenu, page: () => MainMenu()),
     GetPage(name: listFood, page: () => ListFoodPage()),

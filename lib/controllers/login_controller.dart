@@ -1,13 +1,15 @@
-import 'dart:convert';
+import 'package:belajar_flutter/pages/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:belajar_flutter/routes.dart';
+import 'login_model_controller.dart';
 
 class LoginController extends GetxController {
   final txtUsername = TextEditingController();
   final txtPassword = TextEditingController();
   var isLoading = false.obs;
+  var loginModel = Rxn<LoginModel>();
+
 
   void login() async {
     if (txtUsername.text.toString().isEmpty || txtPassword.text.toString().isEmpty) {
@@ -29,21 +31,23 @@ class LoginController extends GetxController {
         if (response.statusCode == 200) {
           // kita ambil jsonnya message pindah tampilan ke main menu
           // contoh json yang paling sederhana, next pertemuan jsonnya compleks
-          final data = jsonDecode(response.body);
-          if (data['status'] == true) {
-            Get.snackbar('Berhasil', data['message']);
-            Get.offNamed(Routes.mainMenu); // ke main menu
+          loginModel.value = loginModelFromJson(response.body);
+          // final data = jsonDecode(response.body);
+          
+          if (loginModel.value?.status == true) {
+            Get.snackbar('Login Berhasil', loginModel.value?.message ?? 'Login berhasil');
+            Get.off(() => MainMenu()); // ke main menu
           } else {
-            Get.snackbar('gagal', data['message']);
+            Get.snackbar('Login Gagal', loginModel.value?.message ?? 'Login gagal');
           }
 
         } else {
-          Get.snackbar('gagal', 'cek internet connection');
+          Get.snackbar('Login Gagal', 'Cek koneksi internet');
         }
 
       } catch (e) {
         isLoading.value = false;
-        Get.snackbar('gagal', e.toString());
+        Get.snackbar('Login Gagal', e.toString());
       }
     }
   }
