@@ -47,7 +47,7 @@ class LoginPage extends StatelessWidget {
                       controller.login();
                     },
                     child: const Text(
-                      "Login...",
+                      "Login",
                       style: TextStyle(
                         fontSize: 30,
                         color: Color.fromARGB(255, 30, 175, 44),

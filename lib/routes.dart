@@ -17,7 +17,7 @@ class Routes {
   static const String cloneApp = '/clone_app';
 
   static final myPages = [
-    GetPage(name: cloneApp, page: () => SpotifyApp()),
+    GetPage(name: cloneApp, page: () => FacebookApp()),
     GetPage(name: login, page: () => LoginPage()),
     GetPage(name: mainMenu, page: () => MainMenu()),
     GetPage(name: listFood, page: () => ListFoodPage()),

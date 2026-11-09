@@ -1,7 +1,7 @@
-import 'package:belajar_flutter/pages/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:belajar_flutter/routes.dart';
 import 'login_model_controller.dart';
 
 class LoginController extends GetxController {
@@ -9,7 +9,6 @@ class LoginController extends GetxController {
   final txtPassword = TextEditingController();
   var isLoading = false.obs;
   var loginModel = Rxn<LoginModel>();
-
 
   void login() async {
     if (txtUsername.text.toString().isEmpty || txtPassword.text.toString().isEmpty) {
@@ -20,7 +19,9 @@ class LoginController extends GetxController {
         final url = Uri.parse('https://mediadwi.com/api/latihan/login');
         // (https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood) ini untuk pertemuan selanjutnya
 
-        final response = await http.post(url, body: {
+        final response = await http.post(
+          url,
+          body: {
             'username': txtUsername.text.toString(),
             'password': txtPassword.text.toString(),
           },
@@ -33,18 +34,20 @@ class LoginController extends GetxController {
           // contoh json yang paling sederhana, next pertemuan jsonnya compleks
           loginModel.value = loginModelFromJson(response.body);
           // final data = jsonDecode(response.body);
-          
+
           if (loginModel.value?.status == true) {
-            Get.snackbar('Login Berhasil', loginModel.value?.message ?? 'Login berhasil');
-            Get.off(() => MainMenu()); // ke main menu
+            Get.snackbar("Berhasil", loginModel.value!.message);
+            //pindah ke main menu
+            //get.off karena login nya di close
+            //carilah satu free api (sport db) yang return nya json array
+            Get.offNamed(Routes.mainMenu);
           } else {
-            Get.snackbar('Login Gagal', loginModel.value?.message ?? 'Login gagal');
+            Get.snackbar("gagal", loginModel.value!.message);
           }
 
         } else {
           Get.snackbar('Login Gagal', 'Cek koneksi internet');
         }
-
       } catch (e) {
         isLoading.value = false;
         Get.snackbar('Login Gagal', e.toString());
