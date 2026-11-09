@@ -47,19 +47,6 @@ class _FacebookLoginPageState extends State<FacebookLoginPage> {
               children: [
                 const SizedBox(height: 20),
 
-                // Language Option at Top
-                Center(
-                  child: Text(
-                    'Bahasa Indonesia • English • Lainnya...',
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 40),
-
-                // Facebook Logo
                 const Center(
                   child: Icon(
                     Icons.facebook,
@@ -69,7 +56,6 @@ class _FacebookLoginPageState extends State<FacebookLoginPage> {
                 ),
                 const SizedBox(height: 40),
 
-                // Username / Email input (menggunakan controller dari LoginController)
                 TextField(
                   controller: controller.txtUsername,
                   keyboardType: TextInputType.emailAddress,
@@ -91,7 +77,6 @@ class _FacebookLoginPageState extends State<FacebookLoginPage> {
                 ),
                 const SizedBox(height: 14),
 
-                // Password input (menggunakan controller dari LoginController)
                 TextField(
                   controller: controller.txtPassword,
                   obscureText: !_isPasswordVisible,
@@ -124,7 +109,6 @@ class _FacebookLoginPageState extends State<FacebookLoginPage> {
                 ),
                 const SizedBox(height: 18),
 
-                // Tombol Login dengan Obx & Loading state dari LoginController
                 Obx(
                   () => controller.isLoading.value
                       ? const Center(
